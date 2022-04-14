@@ -92,13 +92,21 @@
 										</p>
 									</div>
 
-									<input type="submit" value="Update" class="btn btn-warning float-start" />
+									<input type="submit" value="Update Expense" class="btn btn-warning float-start" />
 
 								</form:form>
 
+								<p class="w-100"></p>
+								<a class="btn btn-danger float-end mb-3 me-3"
+									href="/expenses/delete/${expense.id}">Delete
+									Expense</a>
+								<p class="w-100"></p>
+								<p class="w-100 mt-5"></p>
+								<p class="w-100"></p>
 							</div>
 
 							<p class="w-100"></p>
+
 
 
 

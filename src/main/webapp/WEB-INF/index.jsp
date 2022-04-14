@@ -39,19 +39,20 @@
 						<div class="container">
 							<!-- == Home button == -->
 							<!-- <p class="w-100"></p>
-							<a class="btn btn-success float-end mb-3" href="/books/new">button1</a>
+							<a class="btn btn-success float-end mb-3" href="/expenses">Home</a>
 							<p class="w-100"></p> -->
 							<!-- == Home button == -->
 							<!-- <p class="w-100"></p>
-							<a class="btn btn-info float-end mb-3" href="/books/newToo">button2</a>
-							<p class="w-100"></p> -->
-							<p class="w-100 mt-5"></p>
+							<a class="btn btn-info float-end mb-3" href="/expenses/update/${expense.id}">Edit
+								Expense</a>
+							<p class="w-100"></p>
+							<p class="w-100 mt-5"></p> -->
 
 
 							<p class="w-100"></p>
 							<!-- == table == -->
-							<div class="container bg-primary text-dark w-50">
-								<h1 class="text-success">Save Travels</h1>
+							<div class="container w-75">
+								<h1 class="bg-primary text-light ps-3">Save Travels</h1>
 								<table class="table table-striped p-5 border border-2" id="fruit_table">
 									<thead>
 										<tr>
@@ -66,9 +67,11 @@
 											<tr>
 
 												<td scope="row">
-													<p class="text-center">
-														<c:out value="${expense.name}"></c:out>
-													</p>
+													<a href="/expenses/showOne/${expense.id}">
+														<p class="text-center">
+															<c:out value="${expense.name}"></c:out>
+														</p>
+													</a>
 												</td>
 
 												<td scope="row">
@@ -86,9 +89,13 @@
 
 												<td scope="row">
 													<p class="text-center">
-														<!-- <c:out value="${expense.amount}"></c:out> -->
+
+														<a href="/expenses/showOne/${expense.id}">view</a>
+														<span> | </span>
 														<a href="/expenses/update/${expense.id}">edit</a>
-														<!-- <fmt:formatNumber value="${expense.amount}" type="currency" /> -->
+														<span> | </span>
+														<a href="/expenses/delete/${expense.id}">delete</a>
+
 													</p>
 												</td>
 
@@ -107,7 +114,7 @@
 						<p class="w-100"></p>
 						<!-- == form == -->
 						<div
-							class="container bg-secondary text-light rounded-3 w-25 mt-5 border border-info border-5 pb-5">
+							class="container bg-secondary text-light rounded-3 w-25 mt-5 border border-info border-5 pb-5 p-3">
 							<form:form action="/expenses/process" method="post" modelAttribute="expense">
 
 								<div class="mb-3">

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class HomeController {
 	
 	// --------------------- Home - showing all expense and add expense form
 	
+	// page showing all expenses and a form to add expense
 	@GetMapping("/expenses")
 	public String index(Model model, @ModelAttribute("expense") Expense expense) {
 		
@@ -43,14 +45,37 @@ public class HomeController {
 	
 	
 	
+	// --------------------- show one expense
+	
+	// page to show one expense
+	@GetMapping("/expenses/showOne/{id}")
+	public String showOne(Model model,@PathVariable(value="id") long id) {
+		
+			Expense expense = expenseService.findExpense(id);
+			
+			model.addAttribute("expense", expense);
 
+				return "showOneExpense.jsp";
+	}
+	
+	
+	// -------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ----------------------------
+	
+
+	
 	// ------------------------- Create Expense Processing ----------------------------------
 	
+	// create expense processing
 	@PostMapping("/expenses/process")
-	public String createExpense(@Valid @ModelAttribute("expense") Expense expense, BindingResult result) {
+	public String createExpense(
+			@Valid 
+			@ModelAttribute("expense") Expense expense, BindingResult result) {
+		
 		if (result.hasErrors()) {
             return "index.jsp";
+            
         } else {
+        	
             expenseService.createExpense(expense);
             return "redirect:/expenses";
         }
@@ -59,8 +84,10 @@ public class HomeController {
 	// -------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ --------------------------------
 	
 	
+	
 	// ------------------------------------------ Updating Expense ----------------------------------
-		// page for updating an expense
+	
+	// page for updating an expense
 	@GetMapping("/expenses/update/{id}")
 	public String expenseUpdate(Model model, @PathVariable(value="id") long id) {
 		
@@ -87,24 +114,19 @@ public class HomeController {
         }
 	}
 	
+	// ------------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ----------------------------------
+		
 	
-		
-		
-		// ------------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ----------------------------------
-		
-
 	
-
+	// ------------------------------------------ Delete Expense ----------------------------------
 	
-		// ------------------------------------------ Delete Expense ----------------------------------
-		
-//		@RequestMapping(value="/books/delete/{bookId}")
-//		public String destroy(@PathVariable("bookId") Long bookId) {
-//			bookService.deleteBook(bookId);
-//			
-//			return "redirect:/books";
-//		}
-				
-		// ------------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ----------------------------------
+	// delete expense processing
+	@GetMapping("/expenses/delete/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		expenseService.deleteExpense(id);
+		return "redirect:/expenses";
+	}
+			
+	// ------------------------------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ----------------------------------
 
 }
