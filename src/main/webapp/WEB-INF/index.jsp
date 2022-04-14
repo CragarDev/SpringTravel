@@ -58,29 +58,41 @@
 											<th scope="col" class="h4 text-center">Expense</th>
 											<th scope="col" class="h4 text-center">Vendor</th>
 											<th scope="col" class="h4 text-center">Amount</th>
+											<th scope="col" class="h4 text-center">Actions</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="expense" items="${expenses}">
 											<tr>
+
 												<td scope="row">
 													<p class="text-center">
 														<c:out value="${expense.name}"></c:out>
 													</p>
 												</td>
+
 												<td scope="row">
 													<p class="text-center">
-
 														<c:out value="${expense.vendor}"></c:out>
-
 													</p>
 												</td>
+
 												<td scope="row">
 													<p class="text-center">
 														<!-- <c:out value="${expense.amount}"></c:out> -->
 														<fmt:formatNumber value="${expense.amount}" type="currency" />
 													</p>
 												</td>
+
+												<td scope="row">
+													<p class="text-center">
+														<!-- <c:out value="${expense.amount}"></c:out> -->
+														<a href="/expenses/update/${expense.id}">edit</a>
+														<!-- <fmt:formatNumber value="${expense.amount}" type="currency" /> -->
+													</p>
+												</td>
+
+
 											</tr>
 										</c:forEach>
 									</tbody>
